@@ -1,0 +1,25 @@
+div
+  v-text-field(v-model="item.id" label="ID" disabled)
+  v-text-field(v-model="item.firstName" label="First Name" required)
+  v-text-field(v-model="item.lastName" label="Last Name" required)
+  v-text-field(v-model="item.email" label="Email" required)
+  v-text-field(v-model="item.phone" label="Phone")
+  v-text-field(v-model="item.address" label="Address" required)
+  v-text-field(v-model="item.city" label="City")
+  v-text-field(v-model="item.country" label="Country")
+  v-text-field(v-model="item.memberID" label="Member ID" required)
+  div
+    v-btn( color="success" @click="updateCustomer(item.id)" ) Update
+    v-btn( color="primary" @click="dialog = true") Remove
+  v-dialog(v-model="dialog" width="500")
+    v-card
+      v-card-title(class="headline grey lighten-2"
+      primary-title) Delete Confirm
+      v-card-text Are you sure to delete this item?
+      v-divider
+      v-card-actions
+        v-spacer
+        v-btn(color="success"
+        @click="removeCustomer(item.id)") OK
+        v-btn(color="primary"
+        @click="dialog = false") Cancel

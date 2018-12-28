@@ -1,0 +1,28 @@
+.customer-background {
+  //background: red;
+  //display: flex;
+}
+
+.customer-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2em;
+}
+
+.customer-info {
+text-align: center;
+}
+
+.customer-list {
+  justify-content: center;
+}
+.customer-outside{
+  display: flex;
+  justify-content: space-between;
+
+}
+.customer-inside{
+  justify-content: center;
+  text-align: center;
+}
