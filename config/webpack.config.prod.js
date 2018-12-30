@@ -16,7 +16,7 @@ const extractSass = new ExtractTextPlugin({
   disable: process.env.NODE_ENV === 'development'
 })
 
-webpackConfig.module.rules = [...webpackConfig.module.rules,
+AddCustomerComponent.rules = [...webpackConfig.module.rules,
   {
     test: /\.scss$/,
     use: extractSass.extract({

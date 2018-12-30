@@ -1,19 +1,20 @@
 import {Module} from 'vuex';
 import {actions} from './actions';
 import {mutations} from './mutations';
-import {ProfileState} from './types';
 import {getters} from './getters';
-import {RootState} from '../types';
+import {RootState} from '../rootState';
+import {CustomerState} from './states';
 
-export const state: ProfileState = {
-  user: undefined,
+export const state: CustomerState = {
+  customerModel: undefined,
+  customers: [],
   error: false,
-  loggedIn: false,
+  messageError: []
 };
 
 const namespaced: boolean = true;
 
-export const profile: Module<ProfileState, RootState> = {
+export const customer: Module<CustomerState, RootState> = {
   namespaced,
   state,
   getters,

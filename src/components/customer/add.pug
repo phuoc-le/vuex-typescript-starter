@@ -1,11 +1,12 @@
 div
-  v-btn(color="info" @click="goToListCustomer") List Customer
-  v-text-field(v-model="item.firstName" label="First Name" required)
-  v-text-field(v-model="item.lastName" label="Last Name" required)
-  v-text-field(v-model="item.email" label="Email" required)
-  v-text-field(v-model="item.phone" label="Phone")
-  v-text-field(v-model="item.address" label="Address" required)
-  v-text-field(v-model="item.city" label="City")
-  v-text-field(v-model="item.country" label="Country")
-  v-text-field(v-model="item.memberID" label="Member ID" required)
-  v-btn(color="success" @click="addCustomer") Add Customer
+  v-form(v-model="valid" ref="form")
+    v-btn(color="info" @click="goToListCustomer") List Customer
+    v-text-field(v-model="item.firstName" label="First Name" :rules="[rules.required]" required)
+    v-text-field(v-model="item.lastName" label="Last Name" :rules="[rules.required]" required)
+    v-text-field(v-model="item.email" label="Email" :rules="[rules.required, rules.email]" required)
+    v-text-field(v-model="item.phone" label="Phone")
+    v-text-field(v-model="item.address" label="Address" :rules="[rules.required]" required)
+    v-text-field(v-model="item.city" label="City")
+    v-text-field(v-model="item.country" label="Country")
+    v-text-field(v-model="item.memberID" label="Member ID" :rules="[rules.required]" required)
+    v-btn(color="success" @click="add") Add Customer

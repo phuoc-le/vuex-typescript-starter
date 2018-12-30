@@ -3,7 +3,7 @@ div.customer-background
     h3 List Customer
     v-btn(color="success" @click="goToAddCustomer") Add Customer
   div.customer-list
-    div(v-for="item in items").customer-outside
+    div(v-for="customer in customers").customer-outside
       div.customer-inside
-        span {{item.firstName}} {{item.lastName}} {{item.email}}
-          v-btn(color="info" @click="editCustomer(item.id)") Update
+        span {{customer.firstName}} {{customer.lastName}} {{customer.email}}
+          v-btn(color="info" @click="editCustomer(customer.id)") Update

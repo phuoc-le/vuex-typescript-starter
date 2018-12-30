@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Vuex, {StoreOptions} from 'vuex';
-import {profile} from './profile';
-import {RootState} from './types';
+import {user} from './user';
+import {customer} from './customer';
+import {RootState} from './rootState';
 
 Vue.use(Vuex);
 
@@ -10,7 +11,8 @@ const store: StoreOptions<RootState> = {
     version: '1.0.0',
   },
   modules: {
-    profile
+    user,
+    customer
   }
 };
 

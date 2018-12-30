@@ -1,9 +1,9 @@
 import {Component, Vue} from 'vue-property-decorator'
 import {Action, Getter, State} from 'vuex-class';
-import {ProfileState} from './store/profile/types';
+import {UserState} from './store/user/states';
 import router from './router';
 
-const namespace: string = 'profile';
+const namespace: string = 'user';
 
 
 @Component({
@@ -11,8 +11,7 @@ const namespace: string = 'profile';
   router
 })
 export default class AppComponent extends Vue {
-  @State('profile') profile: ProfileState;
-  @Action('fetchData', {namespace}) fetchData: any;
+  @State('user') user: UserState;
   @Action('logout', {namespace}) logout: any;
   @Getter('fullName', {namespace}) fullName: string;
   items = [
@@ -29,22 +28,20 @@ export default class AppComponent extends Vue {
     }
   ];
   drawer = true;
-  mini = true;
-
-  mounted() {
-  }
+  mini = false;
 
   get email() {
-    const user = this.profile && this.profile.user;
+    const {user} = this.user;
     return (user && user.email) || '';
   }
 
   get imageUrl() {
-    return this.profile.user.profile.picture || 'https://randomuser.me/api/portraits/men/85.jpg';
+    const {user} = this.user;
+    return user.profile.picture || 'https://randomuser.me/api/portraits/men/85.jpg';
   }
 
   get isLogin(): boolean {
-    return !!(this.profile && this.profile.user);
+    return (this.user && this.user.loggedIn);
   }
 
   public signout() {

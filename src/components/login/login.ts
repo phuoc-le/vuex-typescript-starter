@@ -1,33 +1,19 @@
 import {Component, Vue} from 'vue-property-decorator'
-import axios from 'axios'
-import {getHostUrl} from '../../repository/const';
-import {Action, State} from 'vuex-class';
-import {ProfileState} from '../../store/profile/types';
+import {Action} from 'vuex-class';
+import {UserLogin} from '../../models/user';
 
-const namespace: string = 'profile';
-
-interface UserResponse {
-  email: string;
-  password: string;
-}
+const namespace: string = 'user';
 
 @Component({
   template: require('./login.pug')()
 })
 export class LoginComponent extends Vue {
-  @State('profile') profile: ProfileState;
   @Action('login', {namespace}) login: any;
-  item: UserResponse = {
-    email: 'marlee_mraz80@yahoo.com',
+
+  item: UserLogin = {
+    email: 'evans35@hotmail.com',
     password: '123456'
   };
-  protected axios;
-  url = getHostUrl() + '/login';
-
-  constructor() {
-    super();
-    this.axios = axios
-  }
 
   mounted() {
     this.$nextTick(() => {

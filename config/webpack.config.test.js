@@ -3,7 +3,7 @@ const DefinePlugin = require('webpack/lib/DefinePlugin')
 const SourceMapDevToolPlugin = require('webpack/lib/SourceMapDevToolPlugin')
 const env = require('../environment/dev.env')
 
-webpackConfig.module.rules = [
+AddCustomerComponent.rules = [
   {
     test: /\.ts$/,
     exclude: /node_modules/,

@@ -36,17 +36,20 @@ const createRoutes: () => RouteConfig[] = () => [
   {
     name: 'customer-add',
     path: '/customer/add/',
-    component: AddCustomerComponent
+    component: AddCustomerComponent,
+    meta: {requiresAuth: true}
   },
   {
     name: 'customer-update',
     path: '/customer/update/:id',
-    component: UpdateCustomerComponent
+    component: UpdateCustomerComponent,
+    meta: {requiresAuth: true}
   },
   {
     name: 'customer-list',
     path: '/customer/list',
-    component: ListCustomerComponent
+    component: ListCustomerComponent,
+    meta: {requiresAuth: true}
   },
 ];
 
@@ -54,7 +57,7 @@ const router = new VueRouter({mode: 'history', routes: createRoutes()});
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (store.getters['profile/isLoggedIn']) {
+    if (store.getters['user/isLoggedIn']) {
       next();
       return
     }

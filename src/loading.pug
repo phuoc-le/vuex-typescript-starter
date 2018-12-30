@@ -1,3 +1,10 @@
 div
-  p(v-if="loading" style="color: red; font-size:50px; text-align: center") loading...
+  div(v-if="loading")
+    svg(width="70" height="20")
+      circle(cx="10" cy="10" r="0")
+        animate(attributeName="r" from="0" to="10" values="0;10;10;10;0" dur="1000ms" repeatCount="indefinite")
+      circle(cx="35" cy="10" r="0")
+        animate(attributeName="r" from="0" to="10" values="0;10;10;10;0" begin="200ms" dur="1000ms" repeatCount="indefinite")
+      circle(cx="60" cy="10" r="0")
+        animate(attributeName="r" from="0" to="10" values="0;10;10;10;0" begin="400ms" dur="1000ms" repeatCount="indefinite")
   app-component(v-else)

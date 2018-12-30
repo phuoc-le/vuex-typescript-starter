@@ -1,62 +1,35 @@
 import {Component, Vue} from 'vue-property-decorator'
-import axios, {AxiosResponse} from 'axios'
-import {getHostUrl} from '../../repository/const';
+import Customer from '../../models/customer';
+import {Action, Getter} from 'vuex-class';
 
-
-interface CustomerResponse {
-  firstName: string;
-  lastName: string;
-  address: string;
-  email: string;
-  phone: string;
-  country: string;
-  city: string;
-  memberID: string;
-}
+const namespace: string = 'customer';
 
 @Component({
   template: require('./add.pug')(),
   components: {}
 })
 export class AddCustomerComponent extends Vue {
+  @Action('addCustomer', {namespace}) addCustomer: any;
 
-  item: CustomerResponse = {
-    address: '',
-    email: '',
-    lastName: '',
-    firstName: '',
-    country: '',
-    phone: '',
-    city: '',
-    memberID: ''
-  };
-  protected axios;
-  private url = getHostUrl() + '/customer-manage/add';
+  item: Customer = new Customer('', '', '', '', '', '', '', '', '');
+  valid = true;
 
-  constructor() {
-    super();
-    this.axios = axios
-  }
-
-  mounted() {
-    this.$nextTick(() => {
-    })
-  }
-
-  public addCustomer() {
-    axios.post(this.url, this.item).then((item) => {
-      if (item.data.status === 'failed') {
-        item.data.errors.map((err) => {
-          console.log('add| error', err.msg)
-        });
-        this.$router.push('/customer/add')
-      } else {
-        this.$router.push('/customer/list')
+  get rules() {
+    const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    return {
+      required: value => !!value || 'Required.',
+      counter: value => value.length <= 20 || 'Max 20 characters',
+      email: value => {
+        return pattern.test(value) || 'Invalid e-mail.'
       }
-    }).catch((err) => {
-      console.log('add| error', err);
-      this.$router.push('/customer/add')
-    });
+    }
+  }
+
+  public add() {
+    const isValidated = (this.$refs.form as any).validate();
+    if (isValidated) {
+      this.addCustomer(this.item);
+    }
   }
 
   public goToListCustomer() {

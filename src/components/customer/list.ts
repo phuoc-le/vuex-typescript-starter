@@ -1,58 +1,28 @@
 import {Component, Vue} from 'vue-property-decorator'
-import axios, {AxiosResponse} from 'axios'
 import '@/styles/stylus/list.styl'
-import {getHostUrl} from '../../repository/const';
+import Customer from '../../models/customer';
+import {Action, Getter} from 'vuex-class';
 
-interface CustomerResponse {
-  id: string;
-  firstName: string;
-  lastName: string;
-  address: string;
-  email: string;
-  phone: string;
-  country: string;
-  city: string;
-  memberID: string;
-}
+const namespace: string = 'customer';
 
 @Component({
   template: require('./list.pug')(),
   components: {},
 })
 export class ListCustomerComponent extends Vue {
+  @Action('getListCustomer', {namespace}) getListCustomer: any;
+  @Getter('customers', {namespace}) customers: Customer[];
 
-  items: CustomerResponse[] = [];
-  protected axios;
-  private url = getHostUrl() + '/customer-manage/list';
-
-  constructor() {
-    super();
-    this.axios = axios
-  }
+  items: Customer[] = [];
 
   mounted() {
-    this.$nextTick(() => {
-      this.loadItems()
-    })
-  }
-
-  private loadItems() {
-    if (!this.items.length) {
-      this.axios.get(this.url).then((response: AxiosResponse) => {
-        this.items = response.data;
-      }, (error) => {
-        console.error(error)
-      })
-    }
+    this.getListCustomer();
   }
 
   public editCustomer(id: string) {
     this.$router.push({
       name: 'customer-update',
-      params: {
-        id: id,
-        item: this.items.filter((item) => item.id === id)[0] as any
-      }
+      params: {id}
     });
   }
 

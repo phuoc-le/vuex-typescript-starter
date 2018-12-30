@@ -1,6 +1,6 @@
 const webpackConfig = require('./webpack.config.test')
 
-webpackConfig.module.rules = [...webpackConfig.module.rules,
+AddCustomerComponent.rules = [...webpackConfig.module.rules,
   {
     test: /\.ts$/,
     enforce: 'post',

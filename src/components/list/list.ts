@@ -50,7 +50,6 @@ export class ListComponent extends Vue {
           }
         }).then((response: AxiosResponse) => {
         this.items = response.data
-        console.log('list|', this.items);
       }, (error) => {
         console.error(error)
       })

@@ -1,9 +1,9 @@
 import {GetterTree} from 'vuex';
-import {ProfileState} from './types';
-import {RootState} from '../types';
+import {UserState} from './states';
+import {RootState} from '../rootState';
 
 
-export const getters: GetterTree<ProfileState, RootState> = {
+export const getters: GetterTree<UserState, RootState> = {
   fullName(state): string {
     const {user} = state;
     return (user && user.fullName) || '';

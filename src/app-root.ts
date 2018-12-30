@@ -2,8 +2,8 @@ import {Component, Vue} from 'vue-property-decorator'
 import {Action} from 'vuex-class';
 import AppComponent from './app';
 
-const namespace: string = 'profile';
-
+const namespace: string = 'user';
+import './styles/sass/loading.scss';
 @Component({
   template: require('./loading.pug')(),
   components: {
