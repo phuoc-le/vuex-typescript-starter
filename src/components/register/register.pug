@@ -1,0 +1,9 @@
+div
+  v-form(v-model="valid" ref="form")
+    v-text-field(v-model="item.fullName" label="Full Name" browser-autocomplete :rules="[rules.required]" required)
+    v-text-field(v-model="item.email" label="Email" browser-autocomplete :rules="[rules.required, rules.email]" required)
+    v-text-field(v-model="item.password" label="Password" browser-autocomplete :rules="[rules.required, rules.counter]" required)
+    v-text-field(v-model="item.confirmPassword" label="Confirm Password" browser-autocomplete :rules="[rules.required, rules.passwordMatch]" required)
+    v-btn(color="success" @click="signup") Register
+  v-alert(:value="emailAlreadyExist" type="error")
+    p This account has been already existed!

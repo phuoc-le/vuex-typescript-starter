@@ -10,7 +10,10 @@ export default class User {
     this.profile = profile;
   }
 }
+
 export interface UserLogin {
+  fullName?: string;
   email: string;
   password: string;
+  confirmPassword?: string;
 }

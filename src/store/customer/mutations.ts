@@ -46,7 +46,6 @@ export const mutations: MutationTree<CustomerState> = {
   [types.LIST_CUSTOMER_ERROR](state) {
     state.error = true;
     state.messageError = undefined;
-
   },
   [types.CUSTOMER_SUCCESS](state, payload: Customer) {
     state.error = false;

@@ -1,12 +1,14 @@
 import Vue from 'vue'
-import VueRouter, {RouteConfig} from 'vue-router'
+import VueRouter, {RouteConfig} from 'vue-router';
+import * as passport from 'passport';
 import {AddCustomerComponent, ListCustomerComponent} from './components/customer';
 import {HomeComponent} from './components/home';
 import {AboutComponent} from './components/about';
 import {ListComponent} from './components/list';
 import {UpdateCustomerComponent} from './components/customer/update';
-import {LoginComponent} from './components/login/login';
+import {LoginComponent} from './components/login';
 import store from './store';
+import {RegisterComponent} from './components/register';
 
 require('./hot-reload');
 Vue.use(VueRouter);
@@ -19,6 +21,11 @@ const createRoutes: () => RouteConfig[] = () => [
     meta: {requiresAuth: true}
   },
   {
+    name: 'google-callback',
+    path: '/auth/google/callback',
+    component: LoginComponent,
+  },
+  {
     name: 'about',
     path: '/about',
     component: AboutComponent
@@ -27,6 +34,11 @@ const createRoutes: () => RouteConfig[] = () => [
     name: 'login',
     path: '/login',
     component: LoginComponent
+  },
+  {
+    name: 'register',
+    path: '/register',
+    component: RegisterComponent
   },
   {
     name: 'list',

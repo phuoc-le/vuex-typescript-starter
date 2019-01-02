@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const DefinePlugin = require('webpack/lib/DefinePlugin')
 const env = require('../environment/dev.env')
 
-AddCustomerComponent.rules = [...webpackConfig.module.rules,
+webpackConfig.module.rules = [...webpackConfig.module.rules,
   {
     test: /\.scss$/,
     use: [{

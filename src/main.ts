@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify';
-
 import '@/styles/sass/main.scss'
 import colors from 'vuetify/es5/util/colors';
 import store from './store';
 import AppMainComponent from './app-root';
+import GSignInButton from 'vue-google-signin-button'
+Vue.use(GSignInButton);
 
 Vue.use(Vuetify, {
   theme: {
@@ -14,12 +15,10 @@ Vue.use(Vuetify, {
   }
 });
 
-// tslint:disable-next-line:no-unused-expression
-
 new Vue({
   el: '#app',
   components: {
     'app': AppMainComponent
   },
-  store
+  store,
 });

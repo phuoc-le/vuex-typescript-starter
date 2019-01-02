@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {getHostUrl} from '../repository/const';
+import {getHostUrl} from '../helper/constants';
 import Customer from '../models/customer';
 
 export async function getCustomer(id: string) {

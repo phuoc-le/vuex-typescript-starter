@@ -32,6 +32,16 @@ export const mutations: MutationTree<UserState> = {
   [types.LOGOUT_ERROR](state) {
     state.error = true;
     state.loggedIn = true;
-  }
+  },
+  [types.REGISTER_SUCCESS](state, payload: User) {
+    state.error = false;
+    state.user = payload;
+    state.loggedIn = true;
+  },
+  [types.REGISTER_ERROR](state) {
+    state.error = true;
+    state.user = undefined;
+    state.loggedIn = false;
+  },
 };
 

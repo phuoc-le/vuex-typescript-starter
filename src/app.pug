@@ -36,6 +36,8 @@ v-app
       v-icon apps
     v-btn(icon @click="login" v-if="!isLogin")
       v-icon save_alt
+    v-btn(icon @click="register" v-if="!isLogin")
+      v-icon person_add
     v-btn(icon @click="signout" v-if="isLogin")
       v-icon exit_to_app
   v-content(app)

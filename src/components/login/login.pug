@@ -2,3 +2,8 @@ div
   v-text-field(v-model="item.email" label="Email" required browser-autocomplete)
   v-text-field(v-model="item.password" label="Password" required browser-autocomplete)
   v-btn(color="success" @click="signin") Login
+  g-signin-button(:params="googleSignInParams"
+                  @success="onSignInSuccess"
+                  @error="onSignInError")
+    span Sign in with Google
+

@@ -13,7 +13,6 @@ const namespace: string = 'user';
 export default class AppComponent extends Vue {
   @State('user') user: UserState;
   @Action('logout', {namespace}) logout: any;
-  @Getter('fullName', {namespace}) fullName: string;
   items = [
     {title: 'Home', icon: 'label', routerName: 'home', subItems: null},
     {title: 'About', icon: 'info', routerName: 'about', subItems: null},
@@ -35,9 +34,15 @@ export default class AppComponent extends Vue {
     return (user && user.email) || '';
   }
 
+  get fullName() {
+    const {user} = this.user;
+    return user && user.profile && user.profile.name || user.fullName;
+
+  }
+
   get imageUrl() {
     const {user} = this.user;
-    return user.profile.picture || 'https://randomuser.me/api/portraits/men/85.jpg';
+    return user && user.profile && user.profile.picture || 'https://randomuser.me/api/portraits/men/85.jpg';
   }
 
   get isLogin(): boolean {
@@ -51,5 +56,9 @@ export default class AppComponent extends Vue {
 
   public login() {
     this.$router.push({name: 'login'});
+  }
+
+  public register() {
+    this.$router.push({name: 'register'});
   }
 }

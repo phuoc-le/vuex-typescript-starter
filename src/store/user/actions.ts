@@ -25,10 +25,43 @@ export const actions: ActionTree<UserState, RootState> = {
   logout: function ({commit}) {
     localStorage.removeItem('id_token');
     commit(types.LOGOUT_SUCCESS);
+    userApi.logout();
   },
   login: async function ({commit, rootState}, payload) {
     let user: User = null;
     const response = await userApi.login(payload);
+    try {
+      if (response.data.status === 'success') {
+        user = response && response.data.user;
+        localStorage.setItem('id_token', response.data.token);
+        commit(types.LOGIN_SUCCESS, user);
+      }
+    } catch (err) {
+      console.log(err);
+      commit(types.LOGIN_ERROR);
+    }
+    return user;
+  },
+  register: async function ({commit, rootState}, payload) {
+    let user: User = null;
+    const response = await userApi.register(payload);
+    try {
+      if (response.data.status === 'success') {
+        user = response && response.data.user;
+        localStorage.setItem('id_token', response.data.token);
+        commit(types.REGISTER_SUCCESS, user);
+      }
+    } catch (err) {
+      console.log(err);
+      commit(types.REGISTER_ERROR);
+    }
+    console.log('actions|register', response && response.data);
+    return {user, message: response && response.data.message}
+      ;
+  },
+  loginGoogle: async function ({commit}, payload) {
+    let user: User = null;
+    const response = await userApi.loginGoogle(payload);
     try {
       if (response.data.status === 'success') {
         user = response && response.data.user;
